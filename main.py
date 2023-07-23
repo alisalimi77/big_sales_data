@@ -28,7 +28,7 @@ y = prepro_dataset.iloc[:,1].values
 reg_model = regression.RegressionModel(X, y, test_size=0.2, random_state=42)
 
 # Linear Regression
-coefficients_linear, intercept_linear, r2_score_linear = reg_model.perform_linear_regression()
+coefficients_linear, intercept_linear, r2_score_linear  = reg_model.perform_linear_regression()
 print("Linear Regression Coefficients:", coefficients_linear)
 print("Linear Regression Intercept:", intercept_linear)
 print("Linear Regression R-squared Score:", r2_score_linear)
