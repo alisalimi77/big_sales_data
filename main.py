@@ -24,17 +24,31 @@ prepro_dataset = preprocess.normalize_dataset(prepro_dataset) #Normalaization.
 X = prepro_dataset.iloc[:, :-1].values
 y = prepro_dataset.iloc[:,1].values
 
-# Create a RegressionModel instance and pass the dataset to it
-reg_model = regression.RegressionModel(X, y, test_size=0.2, random_state=42)
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Linear Regression
-coefficients_linear, intercept_linear, r2_score_linear  = reg_model.perform_linear_regression()
-print("Linear Regression Coefficients:", coefficients_linear)
-print("Linear Regression Intercept:", intercept_linear)
-print("Linear Regression R-squared Score:", r2_score_linear)
+# Train and test Linear Regression
+linear_regression_model = regression.train_linear_regression(X_train, y_train)
+y_pred_linear = regression.test_regression_model(linear_regression_model, X_test)
 
+# Train and test Decision Tree Regression
+decision_tree_regression_model = regression.train_decision_tree_regression(X_train, y_train)
+y_pred_dt = regression.test_regression_model(decision_tree_regression_model, X_test)
 
-# Random Forest Regression
-feature_importances, r2_score_rf = reg_model.perform_random_forest_regression()
-print("Random Forest Regression Feature Importances:", feature_importances)
-print("Random Forest Regression R-squared Score:", r2_score_rf)
+# Train and test Random Forest Regression
+random_forest_regression_model = regression.train_random_forest_regression(X_train, y_train)
+y_pred_rf = regression.test_regression_model(random_forest_regression_model, X_test)
+
+# Calculate and display regression metrics
+def display_metrics(regression_name, y_true, y_pred):
+    mse, mae, rmse, r2 = regression.calculate_regression_metrics(y_true, y_pred)
+    print(f"{regression_name} Regression Metrics:")
+    print("Mean Squared Error:", mse)
+    print("Mean Absolute Error:", mae)
+    print("Root Mean Squared Error:", rmse)
+    print("R-squared:", r2)
+    print()
+
+display_metrics("Linear", y_test, y_pred_linear)
+display_metrics("Decision Tree", y_test, y_pred_dt)
+display_metrics("Random Forest", y_test, y_pred_rf)
