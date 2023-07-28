@@ -1,7 +1,7 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import f1_score, accuracy_score
 
-# train test split:
+# train test split
 X_train = train_df.iloc[:, :-1]
 y_train = train_df.iloc[:, -1]
 X_test = test_df.iloc[:, :-1]
