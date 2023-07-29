@@ -1,29 +1,74 @@
-# big_sales_data
-This repository provides a comprehensive framework for a regression task for the BigMart Sales dataset
-The dataset contains valuable information about the sales of various products in different retail outlets. The dataset contains the following key features:
+# Bigmart Sales Prediction
 
-Item_Identifier: A unique identifier for each product, allowing us to distinguish between different items.
+This is a Python script to predict sales for the Bigmart retail dataset. The script uses a range of regression techniques, including Linear Regression, Decision Tree Regression, and Random Forest Regression. It also incorporates advanced data preprocessing techniques.
 
-Item_Weight: The weight of each product, which can be useful for understanding its physical characteristics.
+The main.py file contains the primary execution script.
 
-Item_Fat_Content: Indicates whether the product is labeled as low fat or not, providing insights into dietary preferences.
+## Getting Started
 
-Item_Visibility: Represents the percentage of total display area in a store allocated to a specific product, influencing its visibility to customers.
+### Prerequisites
 
-Item_Type: Categorizes each product into a specific type, helping to analyze sales patterns for different product categories.
+To run this script, you'll need the following libraries installed:
 
-Item_MRP: Refers to the Maximum Retail Price (list price) of each product, aiding in pricing and revenue analysis.
+- Pandas
+- NumPy
+- Matplotlib
+- Scikit-learn
 
-Outlet_Identifier: A unique identifier for each store, enabling us to distinguish between different outlets.
+You can install them using pip:
 
-Outlet_Establishment_Year: Indicates the year in which each store was established, which might influence sales trends and store performance.
 
-Outlet_Size: Describes the size of each store in terms of ground area covered, which can impact its capacity and product availability.
+### Usage
 
-Outlet_Location_Type: Categorizes the type of city in which each store is located, providing insights into regional sales patterns.
+To run the script, simply execute the `main.py` file:
 
-Outlet_Type: Specifies whether each outlet is a grocery store or a supermarket, helping to distinguish between different types of stores.
 
-Item_Outlet_Sales: This is the outcome variable to be predicted in the dataset, representing the sales of each product in a particular store. It serves as the target for predictive analysis and regression modeling.
+## Dataset
 
-We can conduct various analyses using this dataset and its comprehensive features, such as sales forecasting, product performance evaluation, and store segmentation, in order to gain valuable insight and make data-driven decisions in the retail industry
+The dataset used in this script is `bigmart.csv`, which is a file containing sales data from a range of Bigmart retail stores. The dataset should be in the same directory as the script.
+
+## Structure
+
+- `main.py`: The main script that loads the dataset, preprocesses the data, splits it into training and testing sets, trains various regression models, tests the models, and finally displays various regression metrics for each model.
+
+- `analyze.py`: This file contains the function `analyze_dataset()` that can be used to analyze any given dataset.
+
+- `prepro.py`: This file contains the `DataPreprocessor` class with various methods for preprocessing data, including handling null values, standardizing the dataset, and normalizing the dataset.
+
+- `regression.py`: This file contains functions for training and testing various regression models, as well as calculating and displaying regression metrics.
+
+## Key Functions
+
+- `analyze_dataset(dataset)`: Analyzes the given dataset.
+
+- `DataPreprocessor.object_to_numeric(dataset)`: Converts object data types to numeric.
+
+- `DataPreprocessor.handle_null_values(dataset, replacement_value)`: Checks and handles null values in the dataset.
+
+- `DataPreprocessor.standardize_dataset(dataset)`: Standardizes the dataset.
+
+- `DataPreprocessor.normalize_dataset(dataset)`: Normalizes the dataset.
+
+- `regression.train_linear_regression(X_train, y_train)`: Trains a linear regression model on the given training data.
+
+- `regression.train_decision_tree_regression(X_train, y_train)`: Trains a decision tree regression model on the given training data.
+
+- `regression.train_random_forest_regression(X_train, y_train)`: Trains a random forest regression model on the given training data.
+
+- `regression.test_regression_model(model, X_test)`: Tests the given model on the testing data.
+
+- `regression.calculate_regression_metrics(y_true, y_pred)`: Calculates a range of regression metrics.
+
+- `display_metrics(regression_name, y_true, y_pred)`: Displays regression metrics for the given regression results.
+
+## Contributing
+
+We welcome any contributions to this project. Please feel free to submit a pull request or open an issue for any changes or improvements you would like to suggest. 
+
+## License
+
+This project is licensed under the MIT License. See `LICENSE` file for details.
+
+## Contact
+
+If you have any questions or need further clarification about the project, feel free to reach out.
