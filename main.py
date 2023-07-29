@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.impute import SimpleImputer
 from sklearn.model_selection import train_test_split
-from analyze import analyze_dataset  # Import analyze.py . check the analyze.py
+from analyze import analyze_dataset
 from prepro import DataPreprocessor
 import regression
 from sklearn.ensemble import RandomForestClassifier
