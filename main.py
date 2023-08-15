@@ -1,60 +1,60 @@
-
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
-from sklearn.impute import SimpleImputer
 from sklearn.model_selection import train_test_split
 from analyze import analyze_dataset
 from prepro import DataPreprocessor
-import regression
-from sklearn.metrics import f1_score, accuracy_score
+from regression import RegressionModel
 
-# ّّImport dataset for example bigmart_sale "bigmart.csv"
+# Load dataset
 dataset = pd.read_csv("bigmart.csv")
 
-# analyze_dataset(dataset)  #It does as the name suggests
+# Analyze dataset (if needed)
+# analyze_dataset(dataset)
 
-preprocess = DataPreprocessor()
+# Initialize DataPreprocessor
+preprocessor = DataPreprocessor()
 
-prepro_dataset = preprocess.object_to_numeric(dataset)  # It does as the name suggests
-prepro_dataset = preprocess.handle_null_values(prepro_dataset, -1)  # Check the null values are not null values
-prepro_dataset = preprocess.standardize_dataset(prepro_dataset)  # Standardization the dataset
-# Normalaization.
-prepro_dataset = preprocess.normalize_dataset(prepro_dataset)
+# Preprocess data
+preprocessed_dataset = preprocessor.object_to_numeric(dataset)
+preprocessed_dataset = preprocessor.handle_null_values(preprocessed_dataset, -1)
+preprocessed_dataset = preprocessor.standardize_dataset(preprocessed_dataset)
+preprocessed_dataset = preprocessor.normalize_dataset(preprocessed_dataset)
 
-# analyze_dataset(prepro_dataset)
+# Split data into features (X) and target (y)
+X = preprocessed_dataset.iloc[:, :-1].values
+y = preprocessed_dataset.iloc[:, -1].values
 
-X = prepro_dataset.iloc[:, :-1].values
-y = prepro_dataset.iloc[:, 1].values
+# Perform feature selection
+# X_selected = preprocessor.feature_selection(X, y, k=10)  # Adjust k as needed
 
-# Split the data into training and testing sets
+# Split data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Train and test Linear Regression
-linear_regression_model = regression.train_linear_regression(X_train, y_train)
-y_pred_linear = regression.test_regression_model(linear_regression_model, X_test)
+# Initialize separate RegressionModel instances for each model
+regressor_linear = RegressionModel()
+regressor_decision_tree = RegressionModel()
+regressor_random_forest = RegressionModel()
 
-# Train and test Decision Tree Regression
-decision_tree_regression_model = regression.train_decision_tree_regression(X_train, y_train)
-y_pred_dt = regression.test_regression_model(decision_tree_regression_model, X_test)
+# Train models
+regressor_linear.train_linear_regression(X_train, y_train)
+regressor_decision_tree.train_decision_tree_regression(X_train, y_train)
+regressor_random_forest.train_random_forest_regression(X_train, y_train)
 
-# Train and test Random Forest Regression
-random_forest_regression_model = regression.train_random_forest_regression(X_train, y_train)
-y_pred_rf = regression.test_regression_model(random_forest_regression_model, X_test)
+# Evaluate models
+models = {
+    "Linear Regression": regressor_linear,
+    "Decision Tree Regression": regressor_decision_tree,
+    "Random Forest Regression": regressor_random_forest
+}
 
-# Calculate and display regression metrics
+for name, model in models.items():
+    y_pred = model.test_regression_model(X_test)
+    mse, mae, rmse, r2 = model.calculate_regression_metrics(y_test, y_pred)
 
-
-def display_metrics(regression_name, y_true, y_pred):
-    mse, mae, rmse, r2 = regression.calculate_regression_metrics(y_true, y_pred)
-    
-    print(f"{regression_name} Regression Metrics:")
-    print("Mean Squared Error:", mse)
-    print("Mean Absolute Error:", mae)
-    print("Root Mean Squared Error:", rmse)
+    print(f"Evaluating {name} model:")
+    print("MSE:", mse)
+    print("MAE:", mae)
+    print("RMSE:", rmse)
     print("R-squared:", r2)
     print()
 
-
-
+print("Done")

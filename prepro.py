@@ -1,6 +1,7 @@
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+from sklearn.feature_selection import SelectKBest, f_regression
+from sklearn.linear_model import Ridge
 
 class DataPreprocessor:
     """
@@ -131,3 +132,34 @@ class DataPreprocessor:
             encoded_column = self.label_encoders[column.name][0]
             
             return encoded_column
+    def feature_selection(self, X, y, k=10):
+            """
+            Perform feature selection using SelectKBest and f_regression.
+
+            Parameters:
+                X (numpy.ndarray): The input feature matrix.
+                y (numpy.ndarray): The target values.
+                k (int): Number of top features to select.
+
+            Returns:
+                numpy.ndarray: Transformed feature matrix with selected features.
+            """
+            selector = SelectKBest(score_func=f_regression, k=k)
+            X_selected = selector.fit_transform(X, y)
+            return X_selected
+    def apply_ridge_regularization(self, X, y, alpha=1.0):
+        """
+        Apply Ridge regularization to the data.
+
+        Parameters:
+            X (numpy.ndarray): The input feature matrix.
+            y (numpy.ndarray): The target values.
+            alpha (float): Regularization strength.
+
+        Returns:
+            numpy.ndarray: Transformed feature matrix after regularization.
+        """
+        ridge = Ridge(alpha=alpha)
+        ridge.fit(X, y)
+        X_regularized = ridge.predict(X)
+        return X_regularized 
