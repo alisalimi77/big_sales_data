@@ -32,11 +32,11 @@ class RegressionModel:
         return y_pred
 
    # Add method to run full test and return metrics
-    def test_and_evaluate(self, X_test, y_test):
-        y_pred = self.test_regression_model(X_test)
-        mse, mae, rmse, r2 = self.calculate_regression_metrics(y_test, y_pred)
+    # def test_and_evaluate(self, X_test, y_test):
+    #     y_pred = self.test_regression_model(X_test)
+    #     mse, mae, rmse, r2 = self.calculate_regression_metrics(y_test, y_pred)
 
-        return mse, mae, rmse, r2
+    #     return mse, mae, rmse, r2
     def calculate_regression_metrics(self, y_true, y_pred):
         mse = mean_squared_error(y_true, y_pred)
         mae = mean_absolute_error(y_true, y_pred)
