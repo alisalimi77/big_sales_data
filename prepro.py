@@ -34,21 +34,46 @@ class DataPreprocessor:
         
         return transformed_dataset
     
-    def handle_null_values(self, dataset, fill_value):
-        """
-        Handle null values in the dataset by filling them with a specified value.
+    # def handle_null_values(self, dataset, fill_value):
+    #     """
+    #     Handle null values in the dataset by filling them with a specified value.
 
+    #     Parameters:
+    #         dataset (pandas.DataFrame): The input dataset.
+    #         fill_value (object): The value to fill in place of null values.
+
+    #     Returns:
+    #         pandas.DataFrame: The dataset with null values filled.
+    #     """
+    #     # Fill null values in the dataset with the specified fill value
+    #     filled_dataset = dataset.fillna(fill_value)
+    #     return filled_dataset
+    def handle_null_values(self,dataset, method='mean'):
+        import pandas as pd
+        """
+        Fill null values using mean, median, or mode
+        
         Parameters:
-            dataset (pandas.DataFrame): The input dataset.
-            fill_value (object): The value to fill in place of null values.
-
+            - data (pd.DataFrame): input dataframe
+            - method (str): fill method, one of ['mean', 'median', 'mode']
+        
         Returns:
-            pandas.DataFrame: The dataset with null values filled.
+            - data (pd.DataFrame): dataframe with nulls filled 
         """
-        # Fill null values in the dataset with the specified fill value
-        filled_dataset = dataset.fillna(fill_value)
-        return filled_dataset
-    
+
+        fill_map = {
+            'mean': dataset.mean(),
+            'median': dataset.median(),
+            'mode': dataset.mode().iloc[0]
+        }
+
+        fill_values = fill_map[method]
+
+        # Fill null values
+        dataset = dataset.fillna(fill_values)
+
+        return dataset
+            
     def standardize_dataset(self, dataset):
         """
         Standardize the dataset by scaling the numerical features to have zero mean and unit variance.
