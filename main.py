@@ -102,19 +102,19 @@ ElasticNet.train_elastic_net_regression(X_train, y_train)
 
 KNeighborsRegressor.train_knn_regression(X_train, y_train)
 
-# PassiveAggressiveRegressor.train_passive_aggressive_regression(X_train, y_train)
+PassiveAggressiveRegressor.train_passive_aggressive_regression(X_train, y_train)
 
-# ExtraTreesRegressor.train_extra_trees_regression(X_train, y_train)
+ExtraTreesRegressor.train_extra_trees_regression(X_train, y_train)
 
-# XGBRegressor.train_xgboost_regression(X_train, y_train)
+XGBRegressor.train_xgboost_regression(X_train, y_train)
 
-# HuberRegressor.train_huber_regression(X_train, y_train)
+HuberRegressor.train_huber_regression(X_train, y_train)
 
-# LGBMRegressor.train_lightgbm_regression(X_train, y_train)
+LGBMRegressor.train_lightgbm_regression(X_train, y_train)
 
-# CatBoostRegressor.train_catboost_regression(X_train, y_train)
+CatBoostRegressor.train_catboost_regression(X_train, y_train)
 
-# GradientBoostingRegressor.train_gradient_boosting_regression(X_train, y_train)
+GradientBoostingRegressor.train_gradient_boosting_regression(X_train, y_train)
 
 
 
