@@ -51,7 +51,7 @@ The dataset used in this script is `bigmart.csv`, which is a file containing sal
 Key Functions
 This section outlines the key functions used in the Bigmart Sales Prediction project.
 
-Data Preprocessing
+## Data Preprocessing
 `DataPreprocessor.object_to_numeric(dataset)`: Converts object data types to numeric for improved compatibility with machine learning algorithms.
 
 `DataPreprocessor.handle_null_values(dataset, replacement_value)`: Detects and handles null values in the dataset by replacing them with the specified replacement value.
